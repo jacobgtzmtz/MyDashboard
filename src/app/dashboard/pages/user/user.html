@@ -1,0 +1,18 @@
+<app-title [title]="'User'"></app-title>
+
+
+<div>
+    @if(usersService.loading()){
+        <mat-spinner></mat-spinner>
+    }@else {
+        @if(user){
+            <img [srcset]="user.avatar" alt="">
+            <div>
+                <h3>Name: {{user.first_name}}</h3> <br>
+                <h3>Last Name: {{user.last_name}}</h3> <br>
+                <h3>Email: {{user.email}}</h3> <br>
+            </div>
+        }
+    }
+    
+</div>

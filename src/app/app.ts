@@ -1,9 +1,11 @@
 import { Component, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { RouterOutlet } from '@angular/router';
+import { NavBar } from './dashboard/shared/nav-bar/nav-bar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [MatButtonModule, RouterOutlet, NavBar],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

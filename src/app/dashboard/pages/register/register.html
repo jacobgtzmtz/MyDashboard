@@ -1,0 +1,38 @@
+<app-title [title]="'Register'"></app-title>
+
+<section class="container mt-3">
+<form style="width: 400px;">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter your name" />
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Enter your password" />
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter your email" />
+    </div>
+
+    <div class="mb-3">
+      <label for="country" class="form-label">Country</label>
+      <select class="form-select" id="country">
+        <option value="">Select a country...</option>
+        @for(country of countries; track country.id){
+            <option [value]="country.id">{{country.name}}</option>
+
+        }
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="terms" class="form-check-label">
+        <input type="checkbox" class="form-check-input" id="terms" />
+        I agree to the terms and conditions
+      </label>
+    </div>
+  </form>
+</section>

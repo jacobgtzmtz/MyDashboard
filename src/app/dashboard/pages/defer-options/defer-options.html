@@ -1,0 +1,68 @@
+<app-title [title]="'Defer options'"></app-title>
+<section>
+    <div class="row">
+        <h2>On immediate</h2>
+        <div class="col mt-2">
+            @defer (on immediate){
+                <heavy-loader-fast>
+                    <span>On immediate!</span>
+                </heavy-loader-fast>
+            }
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="row">
+        <h2>On Timer</h2>
+        <div class="col mt-2">
+            @defer (on timer(2000)){
+                <heavy-loader-fast>
+                    <span>On Timer!</span>
+                </heavy-loader-fast>
+            }
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="row">
+        <h2>On Interaction</h2>
+        <div class="col mt-2">
+            @defer (on interaction){
+                <heavy-loader-fast>
+                    <span>On Interaction with placeholder!</span>
+                </heavy-loader-fast>
+            }@placeholder {
+                <span>Mostrar bloque</span>
+            }
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="row">
+        <h2>On Interaction with element with reference</h2>
+        <div class="col mt-2">
+            @defer (on interaction(BotonDisparador)){
+                <heavy-loader-fast>
+                    <span>On Interaction with element with reference!</span>
+                </heavy-loader-fast>
+            }
+            <button class="btn btn-primary" #BotonDisparador>Click me!</button>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="row">
+        <h2 #EncabezadoDisparador>On Hover </h2>
+        <div class="col mt-2">
+            @defer (on hover(EncabezadoDisparador)){
+                <heavy-loader-fast>
+                    <span>On Hover!</span>
+                </heavy-loader-fast>
+            }
+        </div>
+    </div>
+</section>

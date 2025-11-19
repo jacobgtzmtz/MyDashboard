@@ -1,0 +1,45 @@
+<app-title [title]="'Defer views'"></app-title>
+@defer () {
+    <div class="row">
+        <div class="col p-3 mt-2">
+            <heavy-loader-slow [section]="'Uno'" [color] = "'text-bg-primary'"></heavy-loader-slow>
+        </div>
+    </div>
+}@placeholder {
+    <div class="row">
+        <div class="col p-3 mt-2" style="height: 600px;">
+            <mat-spinner></mat-spinner>
+        </div>
+    </div>
+}
+
+@defer (on idle) {
+<div class="row">
+        <div class="col p-3 mt-2">
+            <heavy-loader-slow [section]="'Dos'" [color] = "'text-bg-success'"></heavy-loader-slow>
+        </div>
+    </div>
+    
+}@placeholder {
+    <div class="row">
+        <div class="col p-3 mt-2" style="height: 600px;">
+            <mat-spinner></mat-spinner>
+        </div>
+    </div>
+}
+
+@defer (on viewport) {
+    <div class="row">
+        <div class="col p-3 mt-2">
+           <heavy-loader-slow [section]="'Tres'" [color] = "'text-bg-info'"></heavy-loader-slow>
+        </div>
+    </div>
+} @placeholder {
+    <div class="row">
+        <div class="col p-3 mt-2" style="height: 600px;">
+            <mat-spinner></mat-spinner>
+        </div>
+    </div>
+}
+
+

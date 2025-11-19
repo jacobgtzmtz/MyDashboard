@@ -1,0 +1,65 @@
+<app-title [title]="'Control flow'"></app-title>
+<section>
+ <div class="row">
+    <div class="col-6">
+        <h2><pre>{{'@if'}}</pre>: {{showContent()}}</h2>
+        <button (click)="toggleContent()" class="btn btn-primary">Cambiar bandera</button><br>
+        @if (showContent()) {
+            <span><strong>Top secret data!</strong></span>
+        } @else {
+            ***************
+        }
+    </div>
+
+    <div class="col-6">
+        <h2><pre>{{'@switch'}}</pre></h2>
+        @switch (grade()) {
+            @case ('A') {
+                <p>Calif arriba de 90</p>
+            } 
+            @case ('B') {
+                <p>Arriba de 80</p>
+            }
+            @case ('C') {
+                <p>De pansazo!</p>
+            }
+            @default {
+                <p>Reprobado!</p>
+            }
+
+        }
+    </div>
+ </div>
+
+ <div class="row">
+    <div class="col-6">
+           <h2><pre>{{'@for'}}</pre></h2>
+        <h4>Franeworks 1</h4>
+        <ul>
+            @for (framework of frameworks(); track $index;
+            let index = $index, count = $count, first = $first, last = $last, even = $even, odd = $odd
+            ) {
+              <li [ngClass]="{
+                'bg-primary': first || last,
+                'bg-info':  odd && !last,
+                'bg-warning': even && ! first
+              }">
+                {{index + 1 }} de {{count}} - {{framework}}
+              </li>
+            }
+        </ul>
+    </div>
+    <div class="col-6">
+        <h2><pre>{{'@for'}} - {{'@empty'}}</pre></h2>
+        <h4>Frameworks 2</h4>
+        <ul>
+            @for (item of frameworks2(); track $index) {
+                <li>{{item}}</li>
+            }@empty {
+                <p>No hay frameworks para mostrar</p>
+            }
+        </ul>
+    </div>
+ </div>
+
+</section>
