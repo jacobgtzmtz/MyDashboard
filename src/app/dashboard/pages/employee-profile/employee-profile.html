@@ -1,2 +1,74 @@
 <app-title [title]="'Employee profile'"></app-title>
-<p>employee-profile works!</p>
+
+<section class="container mt-3">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="form">
+    <h2>Basic info</h2>
+    <div formGroupName="basicInfo">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" formControlName="name" />
+        @if(profileForm.get('basicInfo.name')?.invalid &&
+        profileForm.get('basicInfo.name')?.touched){
+        <div class="alert alert-danger">
+          @if(profileForm.get('basicInfo.name')?.errors?.['required']) {
+          <p>Name is required!</p>
+          } @if(profileForm.get('basicInfo.name')?.errors?.['minlength']) {
+          <p>You must capture a minimum of 3 characters.!</p>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role:</label>
+        <input type="text" formControlName="role" class="form-control" />
+        @if(profileForm.get('basicInfo.role')?.invalid && profileForm.get('basicInfo.role')?.touched
+        ){
+        <div class="alert alert-danger">
+          <p>Role is required.</p>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Contact email:</label>
+      <input type="email" formControlName="email" class="form-control" />
+      @if(profileForm.get('email')?.invalid && profileForm.get('email')?.touched){
+
+      <div class="alert alert-danger">
+        @if(profileForm.get('email')?.errors?.['required']){
+        <p>Contact email is required.</p>
+        } @if(profileForm.get('email')?.errors?.['email']){
+        <p>Invalid email format.</p>
+        }
+      </div>
+      }
+    </div>
+
+    <h3>Skills</h3>
+    <div formArrayName="skills">
+      @for(skillsControl of skills.controls; track skillsControl; let i = $index){
+      <div class="form-group mt-2">
+        <div class="d-flex align-items-center">
+          <input type="text" class="form-control me-2" [formControlName]="i" />
+          <button type="button" (click)="removeSkill(i)" class="btn btn-danger btn-sm">X</button>
+        </div>
+      </div>
+      @if(skillsControl.invalid && skillsControl.touched){
+      <div class="alert alert-danger">
+        @if(skillsControl.errors?.['required']){
+        <p>Skill name is required</p>
+        } @if(skillsControl.errors?.['minlength']){
+        <p>You must capture a minimum of 2 characters</p>
+        }
+      </div>
+
+      } }
+    </div>
+    <button type="button" (click)="addSkill()" class="btn btn-secondary mt-2">+ Add skill</button>
+
+    <hr />
+    <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">Save</button>
+  </form>
+</section>

@@ -1,38 +1,108 @@
+<!-- 
+ 1- FormsModule
+ 2- Atributo name Obligatorio
+ 3- enlazar controles con ngmodel
+ -->
 <app-title [title]="'Register'"></app-title>
 
 <section class="container mt-3">
-<form style="width: 400px;">
+<form #f = "ngForm"  style="width: 400px;" (ngSubmit)="onSubmit(f)">
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter your name" />
+      <input type="text" class="form-control" id="name" placeholder="Enter your name" 
+      name="userName" 
+      [(ngModel)]="user.userName" 
+      #name="ngModel"
+      required
+      minlength="4"
+        />
+        @if(name.invalid && name.touched){
+          <div class="alert alert-danger">
+            @if (name.errors?.['required']) {
+              <p>Name is required</p>
+            }
+            @if (name.errors?.['minlength']){
+              <p>You must capture a minimum of 4 characters..</p>
+            }
+          </div>
+        }
     </div>
 
     <div class="mb-3">
       <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password" placeholder="Enter your password" />
+      <input type="password" class="form-control" id="password" placeholder="Enter your password" 
+      name="password"
+      [(ngModel)]="user.password"
+      #password="ngModel"
+      required
+      />
+      @if(password.invalid && password.touched){
+        <div class="alert alert-danger">
+          <p>Password is required</p>
+        </div>
+      }
+
     </div>
 
     <div class="mb-3">
       <label for="email" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter your email" />
+      <input type="email" class="form-control" id="email" placeholder="Enter your email" 
+      name="email"
+      [(ngModel)]="user.email"
+      #email = "ngModel"
+      required
+      pattern="[a-z0-9\._%+\-]+@[a-z0-9\.\-]+\.[a-z]{2,4}$"
+      />
+      @if (email.invalid && email.touched) {
+        <div class="alert alert-danger">
+          @if(email.errors?.['required']){
+            
+              <p>Email is required</p>
+          }
+          @if(email.errors?.['pattern']){
+              <p>The email format is not valid!</p>
+          }
+         </div>
+        
+      }
     </div>
 
     <div class="mb-3">
       <label for="country" class="form-label">Country</label>
-      <select class="form-select" id="country">
+      <select class="form-select" id="country"
+      name="country"
+      [(ngModel)]="user.country"
+      #country="ngModel"
+      >
         <option value="">Select a country...</option>
         @for(country of countries; track country.id){
             <option [value]="country.id">{{country.name}}</option>
-
         }
       </select>
     </div>
 
     <div class="mb-3">
       <label for="terms" class="form-check-label">
-        <input type="checkbox" class="form-check-input" id="terms" />
+        <input type="checkbox" class="form-check-input" id="terms" 
+        name="agree"
+        [(ngModel)]="user.agree"
+        #agree="ngModel"
+        required
+        />
         I agree to the terms and conditions
       </label>
+      @if (agree.invalid && agree.touched) {
+        <div class="alert alert-danger">
+            <p>you must accept the terms.</p>
+        </div>
+      }
     </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="f.invalid" >  
+      Register
+    </button>
+
+
+
   </form>
 </section>
